@@ -1,0 +1,130 @@
+ESTUDO DIRIGIDO - CSS: FLEXBOX (PARTE 2)
+Desenvolvimento Web I
+
+
+1. REVISAO DA PARTE 1
+
+1. O conteiner e o elemento pai, aquele que organiza os filhos. Os itens sao esses filhos diretos. O display: flex se escreve no conteiner, nunca nos itens.
+
+2. Se o CSS nao diz nada, o eixo principal e o horizontal e corre da esquerda para a direita. Isso acontece porque o padrao do flex-direction e row.
+
+
+2. CRESCER: FLEX-GROW
+
+3. A sobra e o espaco que fica livre na faixa depois de somar o tamanho de todos os itens. Quando todos tem flex-grow: 0, ninguem distribui essa sobra, entao ela fica vazia, normalmente no fim da linha (a nao ser que o justify-content mande outra coisa).
+
+4. O valor padrao de flex-grow e 0, o que significa que o item nao cresce alem do tamanho de partida dele.
+
+5. Pensando na pizza:
+- a mesa e a faixa, o conteiner;
+- o prato de cada pessoa e o tamanho de partida de cada item;
+- a sobra e a pizza que ficou no meio da mesa;
+- o peso do flex-grow e quantas fatias cada pessoa pega.
+
+6. Eu uso flex-grow: 1 e coloco na marca:
+
+   .marca { flex-grow: 1; }
+
+Assim ela puxa toda a sobra e os links ficam so do tamanho do texto.
+
+7. Primeiro somo os pesos: 2 + 3 + 1 = 6.
+Depois calculo o valor de uma parte: 600 / 6 = 100px.
+Agora multiplico pelo peso de cada um:
+- item 1: 2 x 100 = 200px
+- item 2: 3 x 100 = 300px
+- item 3: 1 x 100 = 100px
+Resultado final: 200px, 300px e 100px (somam 600px, entao confere).
+
+8. Os tres itens juntos ocupam 3 x 100 = 300px. Sobram 600 - 300 = 300px.
+Os pesos 0, 1 e 2 somam 3, entao cada parte vale 300 / 3 = 100px.
+- item 1 (peso 0): fica com 100px
+- item 2 (peso 1): 100 + 100 = 200px
+- item 3 (peso 2): 100 + 200 = 300px
+Total: 600px.
+
+
+3. ENCOLHER: FLEX-SHRINK
+
+9. O flex-shrink entra em acao quando falta espaco, nao quando sobra. O valor padrao e 1, por isso os itens ja encolhem sozinhos quando precisam.
+
+10. Os dois itens somam 400 + 400 = 800px numa faixa de 600px, entao faltam 200px. Como sao iguais e os dois tem flex-shrink: 1, cada um perde 100px. Largura final: 300px cada um.
+
+11. Com flex-shrink: 0 no primeiro, ele nao cede nada e continua com 400px. O segundo precisa absorver a perda toda e fica com 200px. O conjunto cabe na faixa, porque 400 + 200 = 600px.
+
+12. Um logotipo e um bom exemplo (tambem vale um icone ou um botao) ao lado de um texto comprido. Se ele encolhesse junto com o texto, ficaria esmagado ou deformado. Com flex-shrink: 0, so o texto cede.
+
+
+4. TAMANHO DE PARTIDA E ATALHO FLEX
+
+13. O flex-basis e o tamanho de partida do item no eixo principal, antes de ele crescer ou encolher. Se o item tem width: 200px e flex-basis: 10rem, vale o flex-basis (10rem), porque ele tem prioridade sobre o width.
+
+14. Com flex-basis: 0 o item comeca sem tamanho nenhum, entao a faixa inteira conta como sobra. Por isso o flex-grow reparte tudo, e nao so o que sobraria depois do conteudo.
+
+15. Valores de cada atalho (crescimento, encolhimento, base):
+- flex: initial  ->  grow 0, shrink 1, basis auto
+- flex: 1        ->  grow 1, shrink 1, basis 0
+- flex: auto     ->  grow 1, shrink 1, basis auto
+- flex: none     ->  grow 0, shrink 0, basis auto
+
+16. Com flex: 1 (base 0): a faixa toda e dividida igualmente, 600 / 2 = 300px. Largura final: 300px e 300px.
+
+Com flex: auto (base = conteudo): os itens ocupam 100 + 300 = 400px, entao sobram 600 - 400 = 200px. Cada um recebe 100px a mais. Largura final: 100 + 100 = 200px e 300 + 100 = 400px.
+
+Os resultados mudam porque o flex: 1 ignora o tamanho do conteudo (parte do zero), enquanto o flex: auto comeca do conteudo e divide so a sobra.
+
+17. Falso. So dao o mesmo resultado quando o tamanho de partida dos itens coincide. Se houver width, padding ou conteudo diferente, o auto leva isso em conta e o 1 nao. Dizer "sempre" e exagero.
+
+
+5. O MINIMO QUE TRAVA O ENCOLHIMENTO
+
+18. Quem segura o item e o min-width: auto, que e o padrao dos itens flex e impede que eles fiquem menores que o proprio conteudo. Para soltar, uso min-width: 0 (dependendo do caso, overflow: hidden ou overflow-wrap: anywhere no texto tambem resolvem).
+
+19. Eu esperaria isso num miolo com menu e texto quando o texto tem uma palavra ou URL muito longa, um bloco de codigo ou uma tabela larga. Em vez de encolher, o main estoura a pagina.
+
+
+6. ORDER E ALIGN-SELF
+
+20.
+(a) Na tela fica C, A, B, porque o order: -1 joga o C para a frente.
+(b) Com a tecla Tab, o foco passa por A, B, C, porque segue a ordem do HTML.
+(c) Leitor de tela e teclado seguem a ordem do codigo, nao a visual. Se as duas forem diferentes, a pessoa navega numa sequencia que nao bate com o que esta vendo, e isso confunde. Por isso a ordem do HTML precisa fazer sentido sozinha.
+
+21. O valor padrao do order e 0. Entre order: -1 e order: 2, o -1 aparece primeiro, porque o menor valor vem antes.
+
+22. Com align-self: flex-end, o filho vai para o fim do eixo cruzado (embaixo, numa linha) e deixa de esticar. Com align-self: auto, ele obedece ao align-items do pai, entao continua esticando.
+
+23. Uso align-items no conteiner quando quero alinhar todos os itens do mesmo jeito, e align-self no item quando so ele precisa ser uma excecao.
+
+
+7. A PAGINA COM MIOLO
+
+24. Sao itens de .pagina: o header, o .miolo e o footer.
+Sao itens de .miolo: o aside e o main.
+
+25. Porque o display: flex so vale para os filhos diretos. Ser item de .pagina nao faz o aside e o main virarem itens. Para eles ficarem lado a lado, o .miolo tambem precisa ser um conteiner flex.
+
+26. Declaracao por declaracao:
+- .pagina { display: flex; flex-direction: column; min-height: 100vh; }
+  Empilha topo, miolo e rodape na vertical e garante que a pagina tenha pelo menos a altura da tela.
+- .miolo { display: flex; flex: 1; }
+  Faz o miolo crescer e ocupar a sobra de altura, o que empurra o rodape para baixo. Como tambem e flex, coloca menu e texto lado a lado.
+- aside { flex: 0 0 10rem; }
+  Deixa o menu com 10rem de largura fixa: nao cresce e nao encolhe.
+- main { flex: 1; min-width: 0; }
+  Faz o texto ocupar todo o resto da largura, e o min-width: 0 deixa ele encolher em vez de estourar com conteudo largo.
+
+
+8. ERROS COMUNS E SINTESE
+
+27. O erro e escrever flex-grow no conteiner. Essa propriedade e dos itens. Para consertar, deixo o display: flex no conteiner e coloco flex-grow: 1 (ou flex: 1) nos itens que devem crescer.
+
+28. Duas formas:
+1) min-width: 0 (junto com overflow, se precisar): serve quando o item tem flex-shrink: 1 mas esta travado pelo minimo automatico, como um texto longo ou um codigo dentro do main.
+2) flex-wrap: wrap no conteiner: serve quando os itens nao devem ser espremidos e tudo bem se uma parte passar para a linha de baixo, como em cartoes, galerias e menus.
+
+29. Uma frase para cada propriedade:
+- flex-basis: o tamanho de partida do item no eixo principal, antes de crescer ou encolher.
+- flex-grow: quanto da sobra o item recebe, de acordo com o peso dele em relacao aos irmaos.
+- flex-shrink: quanto o item aceita ceder quando falta espaco.
+- order: muda a posicao visual do item sem mexer no HTML, e o menor valor vem primeiro.
+- align-self: abre uma excecao ao align-items do pai para alinhar um unico item no eixo cruzado.
