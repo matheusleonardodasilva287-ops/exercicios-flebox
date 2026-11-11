@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atividade de JavaScript — Completa</title>
+<style>
+:root{--bg:#fff;--fg:#1d2a24;--mut:#5c6b63;--ac:#2f9e6b;--card:#f3f8f5;--bd:#d5e5dc;--code:#14231c;--codefg:#e6f4ec}
+@media (prefers-color-scheme:dark){:root{--bg:#121a16;--fg:#e4eee8;--mut:#9db0a5;--ac:#4fc08d;--card:#1a2620;--bd:#2a3b32;--code:#0b120f;--codefg:#d6ecdf}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+header{border-bottom:3px solid var(--ac);margin-bottom:24px;padding-bottom:12px}
+header small{color:var(--mut)}
+h1{margin:4px 0;font-size:1.7rem}
+h2{margin-top:40px;color:var(--ac);font-size:1.35rem}
+h3{margin:20px 0 6px;font-size:1.05rem}
+section{border-bottom:1px solid var(--bd);padding-bottom:12px}
+pre{background:var(--code);color:var(--codefg);padding:14px;border-radius:8px;overflow-x:auto;font-size:.9rem;line-height:1.5}
+code{font-family:ui-monospace,Consolas,monospace}
+p code,li code,td code{background:var(--card);padding:1px 5px;border-radius:4px;color:var(--fg)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;margin:8px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left}
+th{background:var(--card)}
+.resp{background:var(--card);border-left:4px solid var(--ac);padding:8px 14px;border-radius:6px;margin:8px 0}
+ol,ul{padding-left:22px}
+li{margin:6px 0}
+</style>
+</head>
+<body>
+<main>
+<header><small>Desenvolvimento Web I • Introdução ao JavaScript</small><h1>Atividade de JavaScript — Completa</h1><small>Todas as etapas (0 a 8) resolvidas</small></header>
+<section>
+<h2>Etapa 0 — Preparando o ambiente</h2>
+<h3>Arquivo index.html</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Atividade JavaScript&lt;/title&gt;
+&lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Atividade de JavaScript&lt;/h1&gt;
+&lt;p id=&quot;mensagem&quot;&gt;Aguardando o JavaScript...&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3>Arquivo script.js</h3><pre><code>console.log(&quot;Olá, JavaScript!&quot;);</code></pre><p>Salvar os dois arquivos (Ctrl+S), abrir o <code>index.html</code> no navegador, apertar F12 e abrir a aba Console. A mensagem <code>Olá, JavaScript!</code> aparece ali.</p><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> Na aba <strong>Console</strong>.</li><li><strong>2.</strong> O <code>defer</code> faz o navegador ler todo o HTML antes de executar o script. Quando o script procura um elemento (por exemplo <code>#mensagem</code>), ele já existe na página. Sem o <code>defer</code>, o script rodaria antes e não encontraria nada (<code>null</code>).</li><li><strong>3.</strong> O navegador não encontraria o arquivo <code>codigo.js</code> (erro 404 no console) e nenhum código seria executado, então a mensagem <code>Olá, JavaScript!</code> não apareceria.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 1 — O que é JavaScript</h2>
+<div class="tbl"><table><tr><th>Expressão</th><th>Resultado observado</th></tr><tr><td><code>2 + 3</code></td><td><code>5</code></td></tr><tr><td><code>"Web" + " I"</code></td><td><code>"Web I"</code></td></tr><tr><td><code>"5" + 3</code></td><td><code>"53"</code></td></tr><tr><td><code>"5" - 3</code></td><td><code>2</code></td></tr><tr><td><code>2 + 3 * 4</code></td><td><code>14</code></td></tr><tr><td><code>(2 + 3) * 4</code></td><td><code>20</code></td></tr></table></div><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> Quando um dos lados do <code>+</code> é texto, o operador concatena: o <code>3</code> vira texto e o resultado é <code>"53"</code>. O <code>-</code> só existe para números, então o JavaScript converte <code>"5"</code> em número e calcula 5 − 3 = 2.</li><li><strong>2.</strong> A multiplicação é feita antes da soma: <code>2 + 3 * 4</code> = 2 + 12 = 14. Com parênteses, a soma vem primeiro: 5 * 4 = 20.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 2 — Variáveis e tipos</h2>
+<h3>script.js</h3><pre><code>const escola = &quot;IFC Concórdia&quot;;
+let nota1 = 8.5;
+let aprovado = false;
+let sobrenome;
+
+console.log(typeof escola);
+console.log(typeof nota1);
+console.log(typeof aprovado);
+console.log(typeof sobrenome);
+
+nota1 = 9;
+console.log(nota1);
+escola = &quot;Outra&quot;;</code></pre><p>Saída no console: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>undefined</code>, <code>9</code> e depois o erro vermelho da última linha. Trocando para <code>let nota1 = "8.5";</code>, o segundo <code>typeof</code> imprime <code>string</code>.</p><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> <code>string</code>, <code>number</code>, <code>boolean</code>, <code>undefined</code>.</li><li><strong>2.</strong> <code>TypeError: Assignment to constant variable</code>. Acontece porque <code>escola</code> foi declarada com <code>const</code>, que não permite trocar o valor depois de definido.</li><li><strong>3.</strong> Válidos: <code>nota_final</code> e <code>$total</code>. Inválidos: <code>3nota</code> (começa com número), <code>nota-final</code> (hífen não é permitido) e <code>class</code> (palavra reservada da linguagem).</li><li><strong>4.</strong> Imprime <code>16</code>: <code>idade</code> começa em 15 e recebe 15 + 1.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 3 — Operadores, conversão e texto com variáveis</h2>
+<h3>script.js</h3><pre><code>const a = 7;
+const b = 2;
+console.log(a + b, a - b, a * b);
+console.log(a / b);
+console.log(a % b);
+console.log(a ** b);
+
+const nome = &quot;Ana&quot;;
+console.log(`Olá, ${nome}! ${a} dividido por ${b} é ${a / b}.`);
+
+console.log(Number(&quot;7.5&quot;) + 1);
+console.log(&quot;7.5&quot; + 1);
+console.log(Number(&quot;abc&quot;));</code></pre><h3>Saída esperada no console</h3><pre><code>9 5 14
+3.5
+1
+49
+Olá, Ana! 7 dividido por 2 é 3.5.
+8.5
+7.51
+NaN</code></pre><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> As 8 linhas de saída estão acima.</li><li><strong>2.</strong> <code>Number("7.5") + 1</code> converte o texto em número e soma: <code>8.5</code>. <code>"7.5" + 1</code> concatena e dá o texto <code>"7.51"</code>. Como o valor de um campo de formulário chega como texto, é preciso converter com <code>Number()</code> antes de fazer contas.</li><li><strong>3.</strong> <code>10 % 3</code> = 1; <code>2 ** 3</code> = 8; <code>10 / 4</code> = 2.5.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 4 — Condicionais</h2>
+<h3>script.js</h3><pre><code>const temperatura = 25;
+
+if (temperatura &gt;= 30) {
+  console.log(&quot;Calor&quot;);
+} else if (temperatura &gt;= 20) {
+  console.log(&quot;Agradável&quot;);
+} else {
+  console.log(&quot;Frio&quot;);
+}
+
+console.log(5 == &quot;5&quot;);
+console.log(5 === &quot;5&quot;);
+console.log(0 == false);
+console.log(0 === false);</code></pre><div class="tbl"><table><tr><th>temperatura</th><th>Mensagem</th></tr><tr><td>25</td><td>Agradável</td></tr><tr><td>30</td><td>Calor</td></tr><tr><td>19</td><td>Frio</td></tr><tr><td>20</td><td>Agradável</td></tr></table></div><p>As quatro últimas linhas imprimem <code>true</code>, <code>false</code>, <code>true</code>, <code>false</code>.</p><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> Com 20 aparece <strong>Agradável</strong>, pois <code>20 &gt;= 30</code> é falso e <code>20 &gt;= 20</code> é verdadeiro. Com 30 aparece <strong>Calor</strong>, pois <code>30 &gt;= 30</code> é verdadeiro e o primeiro bloco já é executado.</li><li><strong>2.</strong> <code>true</code>, <code>false</code>, <code>true</code>, <code>false</code>. Recomenda-se <code>===</code> porque o <code>==</code> converte os tipos antes de comparar e dá resultados surpreendentes (<code>5 == "5"</code> e <code>0 == false</code> são verdadeiros). O <code>===</code> exige mesmo valor e mesmo tipo.</li><li><strong>3.</strong> <code>nota &gt;= 0 &amp;&amp; nota &lt;= 10</code></li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 5 — Repetição e listas</h2>
+<h3>script.js</h3><pre><code>for (let i = 1; i &lt;= 5; i++) {
+  console.log(`Linha ${i}`);
+}
+
+const notas = [8, 6.5, 9, 4];
+let soma = 0;
+for (let i = 0; i &lt; notas.length; i++) {
+  soma += notas[i];
+}
+console.log(soma / notas.length);
+
+notas.push(7);
+console.log(notas.length);
+
+for (const n of notas) {
+  console.log(n);
+}</code></pre><p>Saída: <code>Linha 1</code> a <code>Linha 5</code>, depois <code>6.875</code>, <code>5</code> e os itens <code>8, 6.5, 9, 4, 7</code>, um por linha.</p><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> (8 + 6.5 + 9 + 4) / 4 = 27.5 / 4 = <strong>6.875</strong>.</li><li><strong>2.</strong> O primeiro índice é <code>0</code> e o último é <code>length - 1</code>.</li><li><strong>3.</strong> <pre><code>for (let i = 2; i &lt;= 10; i += 2) {
+  console.log(i);
+}</code></pre></li><li><strong>4.</strong> Teste de mesa: total vale 1, 3, 6 e 10 depois de cada volta. Imprime <code>10</code>.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 6 — Funções</h2>
+<h3>script.js</h3><pre><code>function dobro(x) {
+  return x * 2;
+}
+
+const media = (lista) =&gt; {
+  let soma = 0;
+  for (const n of lista) {
+    soma += n;
+  }
+  return soma / lista.length;
+};
+
+console.log(dobro(21));
+console.log(media([8, 6.5, 9, 4]));</code></pre><p>Saída: <code>42</code> e <code>6.875</code>. No console do navegador: <code>dobro(5)</code> dá <code>10</code> e <code>media([10, 6])</code> dá <code>8</code>.</p><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> Imprime <code>undefined</code>. A função calcula <code>a + b</code>, mas não devolve nada porque falta o <code>return</code>. Correção: <code>return a + b;</code>, que imprime <code>5</code>.</li><li><strong>2.</strong> <pre><code>function ehPar(n) {
+  return n % 2 === 0;
+}</code></pre></li><li><strong>3.</strong> <code>console.log(x)</code> apenas mostra o valor no console e não devolve nada para quem chamou. <code>return x</code> devolve o valor a quem chamou a função (que pode guardá-lo ou usá-lo em contas) e encerra a função.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 7 — Mexendo na página: DOM e eventos</h2>
+<h3>Trecho do index.html</h3><pre><code>&lt;body&gt;
+&lt;h1&gt;Atividade de JavaScript&lt;/h1&gt;
+&lt;p id=&quot;mensagem&quot;&gt;Aguardando o JavaScript...&lt;/p&gt;
+&lt;button id=&quot;botao&quot;&gt;Clique aqui&lt;/button&gt;
+&lt;p&gt;Cliques: &lt;span id=&quot;contador&quot;&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;/body&gt;</code></pre><h3>script.js (com as duas alterações propostas)</h3><pre><code>const mensagem = document.getElementById(&quot;mensagem&quot;);
+const botao = document.querySelector(&quot;#botao&quot;);
+const contador = document.getElementById(&quot;contador&quot;);
+
+mensagem.textContent = &quot;O JavaScript está funcionando!&quot;;
+mensagem.style.color = &quot;green&quot;;
+
+let cliques = 0;
+
+botao.addEventListener(&quot;click&quot;, () =&gt; {
+  cliques++;
+  contador.textContent = cliques;
+  botao.textContent = &quot;Clicado!&quot;;
+});</code></pre><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> Aparece <code>TypeError: Cannot set properties of null (setting 'textContent')</code>. Sem o <code>defer</code>, o script roda antes de o navegador ler o HTML, então <code>getElementById("mensagem")</code> não encontra o parágrafo e devolve <code>null</code>; tentar mudar o <code>textContent</code> de <code>null</code> gera o erro.</li><li><strong>2.</strong> A cada clique o navegador executa a função: <code>cliques</code> aumenta em 1, o número novo é escrito no <code>&lt;span id="contador"&gt;</code> e o texto do botão passa a ser “Clicado!”.</li><li><strong>3.</strong> Porque o valor de <code>cliques</code> muda a cada clique, e uma <code>const</code> não pode ser reatribuída.</li></ol></div>
+</section>
+
+<section>
+<h2>Etapa 8 — Mini-projeto: calculadora de média</h2>
+<h3>8.1 — &lt;body&gt; do index.html</h3><pre><code>&lt;body&gt;
+&lt;h2&gt;Calculadora de média&lt;/h2&gt;
+&lt;label&gt;Nota 1:
+  &lt;input type=&quot;number&quot; id=&quot;nota1&quot; min=&quot;0&quot; max=&quot;10&quot; step=&quot;0.1&quot;&gt;
+&lt;/label&gt;
+&lt;br&gt;
+&lt;label&gt;Nota 2:
+  &lt;input type=&quot;number&quot; id=&quot;nota2&quot; min=&quot;0&quot; max=&quot;10&quot; step=&quot;0.1&quot;&gt;
+&lt;/label&gt;
+&lt;br&gt;
+&lt;button id=&quot;calcular&quot;&gt;Calcular&lt;/button&gt;
+&lt;p id=&quot;resultado&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;</code></pre><h3>8.2 a 8.5 — script.js completo</h3><pre><code>const NOTA_MINIMA = 6;
+
+function calcularMedia(n1, n2) {
+  return (n1 + n2) / 2;
+}
+
+function notaValida(n) {
+  return !Number.isNaN(n) &amp;&amp; n &gt;= 0 &amp;&amp; n &lt;= 10;
+}
+
+const botaoCalcular = document.getElementById(&quot;calcular&quot;);
+const resultado = document.getElementById(&quot;resultado&quot;);
+
+botaoCalcular.addEventListener(&quot;click&quot;, () =&gt; {
+  const texto1 = document.getElementById(&quot;nota1&quot;).value;
+  const texto2 = document.getElementById(&quot;nota2&quot;).value;
+  const n1 = Number(texto1);
+  const n2 = Number(texto2);
+
+  if (texto1 === &quot;&quot; || texto2 === &quot;&quot; || !notaValida(n1) || !notaValida(n2)) {
+    resultado.textContent = &quot;Informe duas notas entre 0 e 10.&quot;;
+    return;
+  }
+
+  const media = calcularMedia(n1, n2);
+  let situacao;
+  if (media &gt;= NOTA_MINIMA) {
+    situacao = &quot;Aprovado&quot;;
+  } else {
+    situacao = &quot;Abaixo da média&quot;;
+  }
+
+  resultado.textContent = `Média: ${media.toFixed(1)} - ${situacao}`;
+});</code></pre><h3>8.3 e 8.4 — testes no console</h3><p><code>calcularMedia(8, 7)</code> → 7.5; <code>calcularMedia(10, 5)</code> → 7.5; <code>calcularMedia(6, 6)</code> → 6. <code>notaValida(5)</code> → true; <code>notaValida(10)</code> → true; <code>notaValida(11)</code> → false; <code>notaValida(-1)</code> → false; <code>notaValida(NaN)</code> → false.</p><p>Sobre <code>n1 + n2 / 2</code>: a divisão acontece antes da soma. Com 8 e 6 dá 8 + 3 = <strong>11</strong>, e a média correta é (8 + 6) / 2 = <strong>7</strong>.</p><h3>8.6 — Tabela de testes</h3><div class="tbl"><table><tr><th>Nota 1</th><th>Nota 2</th><th>Resultado esperado</th><th>Deu certo?</th></tr><tr><td>8</td><td>7</td><td>Média: 7.5 - Aprovado</td><td>Sim</td></tr><tr><td>5</td><td>6</td><td>Média: 5.5 - Abaixo da média</td><td>Sim</td></tr><tr><td>6</td><td>6</td><td>Média: 6.0 - Aprovado (limite)</td><td>Sim</td></tr><tr><td>10</td><td>10</td><td>Média: 10.0 - Aprovado</td><td>Sim</td></tr><tr><td>(vazio)</td><td>5</td><td>Mensagem de erro</td><td>Sim</td></tr><tr><td>11</td><td>5</td><td>Mensagem de erro</td><td>Sim</td></tr></table></div><div class="resp"><strong>Checkpoint</strong><ol><li><strong>1.</strong> Separar o cálculo em uma função deixa o código organizado, reutilizável (pode ser chamada em outros lugares) e fácil de testar sozinha no console, como foi feito com <code>calcularMedia(8, 7)</code>.</li><li><strong>2.</strong> Apenas <strong>uma</strong> linha: <code>const NOTA_MINIMA = 6;</code> passa a ser <code>7</code>, porque o valor fica guardado em uma única constante usada em todo o programa.</li></ol></div>
+</section>
+
+</main>
+</body>
+</html>
